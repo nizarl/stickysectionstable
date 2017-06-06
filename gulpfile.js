@@ -49,6 +49,9 @@ gulp.task('build-component-js', function () {
         stream.queue(helper.createComponentTemplateCache(config)),
         stream.queue(helper.buildComponentJs(config));
     return stream.done()
+        .pipe(plumber(({
+            errorHandler: onError
+        })))
         .pipe(concat(fileName))
         .pipe(helper.copyFile(config))
         .pipe(concat(fileNameMin))
@@ -109,7 +112,7 @@ gulp.task('sequence-styles', function (callback) {
 })
 
 gulp.task('start-local-server', function (cb) {
-    gutil.log(gutil.colors.green(config.componentName +  " web server started at http://localhost:3000 --cors is enabled"));
+    gutil.log(gutil.colors.green(config.componentName + " web server started at http://localhost:3000 --cors is enabled"));
     //--no-cache
     exec(' ws -p 3000 -d ./dist --compress', function (err, stdout, stderr) {});
 });
