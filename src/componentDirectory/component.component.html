@@ -1,0 +1,98 @@
+<div>
+    <div class="patient-info-banner-background">
+        <div id="pat-info-container" class="row patient-view">
+            <div id="pat-info-white-space" class="col-md-1"></div>
+            <div id="pat-info-col1" class="col-md-2">
+                <img class="img-circle img-responsive" data-ng-src="data:image/jpeg;base64,{{patientInfoModel.patientData.photo}}" />
+            </div>
+            <div id="pat-info-col2" class="col-md-3">
+                <div id="pat-info-name" class="patient-name">
+                    <span ng-bind-html="patientInfoModel.patientData.patientName.family | capitalize"></span>&nbsp;
+                    <span ng-bind-html="patientInfoModel.patientData.patientName.given | capitalize"></span>
+                </div>
+                <div id="pat-info-icons" class="patient-info-icons-div">
+                    <span><i class="fa fa-eye patient-info-icons {{patientInfoModel.patientData.Blind == 1 ? '':'disabled'}}"></i></span>
+                    <span><img ng-src="{{patientInfoModel.HearingImpairedImage}}" class="{{patientInfoModel.patientData.muted == 1 ? '':'hearing-impaired-disabled'}}"/></span>
+                    <span><img ng-src="{{patientInfoModel.PublicTransportImage}}" class="{{patientInfoModel.patientData.transportation == 1 ? '':'transportation-disabled'}}"/></span>
+                    <span class="patient-info-hpp {{patientInfoModel.patientData.hpp == 1 ? '':'patient-info-hpp-disabled'}}" title="High Priority Patient">HPP</span>
+                    <span class="patient-info-snp {{patientInfoModel.patientData.snp == 1 ? '':'patient-info-snp-disabled'}}" title="Special Needs Plan">SNP</span>
+                </div>
+                <div id="pat-info-details" class="pat-info-lower">
+                    <div id="pat-info-mrn" class="pat-info-det-table">
+                        <span class="patient-det-headings">MRN:</span>
+                        <span class="patient-det-values" ng-bind-html="patientInfoModel.patientData.mrNumber"></span>
+                    </div>
+                    <div id="pat-info-gender" class="pat-info-det-table">
+                        <span class="patient-det-headings">Gender:</span>
+                        <span class="patient-det-values" ng-bind-html="patientInfoModel.patientData.gender | capitalize"></span>
+                    </div>
+                    <div id="pat-info-dob" class="pat-info-det-table">
+                        <span class="patient-det-headings">DOB:</span>
+                        <span class="patient-det-values">
+                                    <span ng-bind-html="patientInfoModel.patientData.birthDate"></span>
+                        <span ng-if="patientInfoModel.patientData.age" ng-bind-html="('(') + (patientInfoModel.patientData.age) + (')')"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div id="pat-info-col3" class="col-md-2">
+                <!-- <div id="pat-info-check">
+                     <span ><img ng-src="{{patientInfoModel.SavedCorrectImage}}"/></span><span >Saved</span>
+                    </div> -->
+                <div patinfoscroll>
+                    <div id="pat-info-address">
+                        <div id="pat-info-address1">
+                            <span class="patient-det-values" ng-bind-html="patientInfoModel.patientData.address.line[0]"></span>
+                        </div>
+                        <div id="pat-info-city-state-zip">
+                            <span class="patient-det-values" ng-if="patientInfoModel.patientData.address.city" ng-bind-html="(patientInfoModel.patientData.address.city)+ (', ') + (patientInfoModel.patientData.address.state) + (' ') + (patientInfoModel.patientData.address.postalCode)"></span>
+                        </div>
+                        <div id="pat-info-tele" class="pat-info-det-table">
+                            <span class="patient-det-values" ng-bind-html="patientInfoModel.getPrimaryTelecom(patientInfoModel.patientData.telecom).value | tel"></span>
+
+                        </div>
+                    </div>
+                    <div id="pat-info-gender" ng-if="patInfoNotScroll==false" class="pat-info-det-table pat-info-address">
+                        <span class="patient-det-headings">Gender:</span>
+                        <span class="patient-det-values" ng-bind-html="patientInfoModel.patientData.gender | capitalize"></span>
+                    </div>
+                </div>
+            </div>
+            <div id="pat-info-col4" class="col-md-3 pat-info-col4-adjust">
+                <div id="pat-info-name" class="patient-title app-title-left">
+                    <div class="patient-info-title-wrapper">
+                         <span class="patient-info-title-first-segment">{{patientInfoModel.title.firstSegment}}<span class="patient-info-title-second-segment">{{patientInfoModel.title.secondSegment}}</span></span>
+                    </div>
+                   
+                </div>
+                <div id="pat-info-icons" class="patient-info-date-div">
+                    <!--<span>Mon Oct 31, 2016 9:10 AM </span> -->
+                    <span>{{0| customDateFormat}}</span>
+                </div>
+                <div id="pat-info-addldetails" class="pat-info-lower-right">
+                    <div patInfoScroll>
+                        <div id="pat-info-pcp" class="pat-info-det-table-right">
+                            <span class="patient-det-headings">PCP:</span>
+                            <span class="patient-det-values" ng-if="patientInfoModel.patientData.patientCareProvider.family" ng-bind-html="patientInfoModel.patientData.patientCareProvider.family + ', ' + patientInfoModel.patientData.patientCareProvider.given"></span>
+                        </div>
+                        <div id="pat-info-lstvisit" class="pat-info-det-table-right">
+                            <span class="patient-det-headings">Last Visit:</span>
+                            <span class="patient-det-values" ng-bind-html="patientInfoModel.patientData.lastPCPEncounterVisitDate | date:'MM/dd/yyyy'"></span>
+                        </div>
+                        <div id="pat-info-ins" class="pat-info-det-table-right">
+                            <span class="patient-det-headings">Insurance:</span>
+                            <span class="patient-det-values" ng-bind-html="patientInfoModel.patientData.insuranceName"></span>
+                        </div>
+                        <div id="pat-info-dob" ng-if="patInfoNotScroll==false" class="pat-info-det-table-right">
+                            <span class="patient-det-headings">DOB:</span>
+                            <span class="patient-det-values">
+                                <span ng-bind-html="patientInfoModel.patientData.birthDate"></span>
+                            <span ng-if="patientInfoModel.patientData.age" ng-bind-html="('(') + (patientInfoModel.patientData.age) + (')')"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
