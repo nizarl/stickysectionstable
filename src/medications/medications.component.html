@@ -9,58 +9,35 @@
 				data-target="#meds" data-collapse-group="myDivs">
 				<span class="b-card__header-arrow" ng-class="medModel.showPlus ? 'fa fa-chevron-down' : 'fa fa-chevron-up'"></span></a>
 		</div>
-		<div ng-if="medModel.showMedsActions" id="medButtons">
-			<button style="background: black;color: white;margin-bottom: .5em;font-size: 1em;" class="btn pull-right" ng-click="medModel.showRefillOverLay()">Add Medication
-            </button>
-			<button style="background: black;color: white;margin-bottom: .5em;font-size: 1em;" class="btn pull-right" ng-click="medModel.showRefillOverLay()">View Rx Order History
-            </button>
-			<button style="background: black;color: white;margin-bottom: .5em;font-size: 1em;" class="btn pull-right" ng-click="medModel.showRefillOverLay()">Refill Selected
-            </button>
-		</div>
-		<div class="card-content rTable">
-			<div id="meds" class="collapse in" ng-class="medModel.showMedsToggle? 'collapse': 'collapse in'">
-				<div ng-if="medModel.showMedsActions" style="color:#034782;" class="pull-left" id="medHistoryLink">
-					<span ng-class="true ? 'fa fa-chevron-circle-down fa-2x' : 'fa fa-chevron-circle-up fa-2x'"></span></a>
-					<a style="text-decoration: underline;" href="#">Show Medication History</a>
-				</div>
-				<table class="b-table table-meds table table-hover" st-table="medModel.displayedCollection" st-safe-src="medModel.patientMeds" id="tableMeds">
-					<thead style="display: block;" class="b-table__thead">
+		<div class="card-content">
+			<div id="meds" class="table-container collapse in" ng-class="medModel.showMedsToggle? 'collapse': 'collapse in'">
+				<table id="tableMeds" class="b-table b-meds-table table-meds table table-hover" st-table="medModel.displayedCollection" st-safe-src="medModel.patientMeds">
+					<thead class="b-table__thead">
                         	<tr class="b-table__tr" id="meds-content">
 							<th class="b-table__th--hidden">Row</th>
-							<th ng-if="medModel.showMedsActions">
-								<input type="checkbox" ng-model="selectedAll" ng-click="medModel.checkAll()">
-							</th>
 							<th class="b-table__th pointer" st-sort="medModel.getters.medicationName" st-sort-default="true" st-skip-natural="true">Name and SIG</th>
 							<th class="b-table__th pointer" st-sort="medModel.getters.medicationStartDate" st-skip-natural="true">Start Date</th>
 							<th class="b-table__th pointer" st-sort="medModel.getters.prescriber" st-skip-natural="true">Prescribed By</th>
 							<th class="b-table__th pointer" st-sort="medModel.getters.refillQty" st-skip-natural="true">Refill/Qty</th>
 							<th class="b-table__th pointer meds-supply-column" st-sort="medModel.getters.daysSupplyLeft" st-skip-natural="true">Supply Left <span class="meds-days-left">(days)</span></th>
-							<th ng-if="medModel.showMedsActions" colspan="0">Actions Key</th>
 						</tr>
 					</thead>
-					<tbody style="display: block;height: 260px;overflow-y: scroll; border-bottom: solid #f2efef;">
+					<tbody style="border-bottom: solid #f2efef;">
+                      
 						<tr ng-repeat="med in medModel.displayedCollection track by $index">
 							<td class="b-table__td b-table__td--hidden" data-title="Medications Row number">{{$index+1}} of {{medModel.displayedCollection.length}}</td>
-							<td class="b-table__td" ng-if="medModel.showMedsActions">
-								<input type="checkbox" ng-model="med.selected">
-							</td>
 							<td class="b-table__td" id="med-content-det" data-title="Name & SIG with comments">
 								<div><strong>{{med.medicationName}}</strong></div>
 								<div class="light-grey">{{med.dosageInstruction.text}}
 									<span ng-if="med.dosageInstruction.additionalInstructions.text">-- {{med.dosageInstruction.additionalInstructions.text}}</span>
 								</div>
 								</td>
-							<td class="light-grey" data-title="Start Date">{{med.medicationStartDate|date:'MM/dd/yyyy'}}</td>
+							<td  class="light-grey" data-title="Start Date">{{med.medicationStartDate|date:'MM/dd/yyyy'}}</td>
 							<td class="light-grey" data-title="Prescribed By">{{med.prescriber.display}}</td>
 							<td class="light-grey" data-title="Refill/Qty">{{med.refillQty}}</td>
 							<td class="light-grey" data-title="Supply">{{med.daysSupplyLeft}}</td>
-							<td ng-if="medModel.showMedsActions" class="fa fa-check-square-o faMeds"></td>
-							<td ng-if="medModel.showMedsActions" class="fa fa-close faMeds"></td>
 						</tr>
 					</tbody>
 				</table>
-			</div>
-			<div ng-if="medModel.showMedsRefill">
-				<meds-refill></meds-refill>
 			</div>
 		</div>

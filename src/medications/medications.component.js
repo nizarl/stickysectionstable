@@ -8,8 +8,7 @@ angular.module('chenExternalUIComponents')
             return $templateCache.get('medications.component.html');
         }],
         bindings: {
-            showMedsToggle: '<',
-            showMedsActions: '<'
+            showMedsToggle: '<'
         },
         controllerAs: "medModel",
         controller: ['EventService', 'RestClientService', 'PathService', 'PatientService', '$timeout', 'medicationsConstants', medicationsCtrl]

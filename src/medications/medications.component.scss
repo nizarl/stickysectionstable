@@ -29,12 +29,38 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
     }
 }
 
-.scrollit {
-    overflow:scroll;
-    height:100px;
+//TODO: CHANGE BELOW TO BEM
+.b-meds-table {}
+
+
+.b-meds-table > tbody//, table thead
+{
+    display: block;
+}
+.b-meds-table > table
+{
+    display: block;
+}
+.b-meds-table > thead
+{
+    display: block;
 }
 
-//todo: change below to BEM
+.b-meds-table  > tbody 
+{
+   overflow: auto;
+   height: 280px;
+}
+
+.b-meds-table > thead > tr > th
+{
+    width: 300px;
+}
+.b-meds-table > tbody tr td
+{
+    width: 300px;
+}
+
 .faMeds.fa {
     width: 50%;
 }
@@ -49,30 +75,7 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
 .meds-row-number {
     text-align: right;
 }
-.medications-card-header {
-       // @extend .card-header-common;
-       // @include card-header-specfic($medications-header-color);
-        height: 45px;
-    }
-.meds-header-parens{
-    //color: $medications-header-parens !important;
-    //font-size: $font-size-medium !important;
-}
-.meds-supply-column{
-    width: 15%;
-}
-.meds-days-left{
-    //color: $medications-header-parens !important;
-    font-size: .9em;
-}
 
-#med-content-header {
-   // @extend .card-content-align;
-}
-
-#med-content-det {
-   // @extend .card-content-align;
-}
 
 @media only screen and (max-width: 768px),
 (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -120,18 +123,7 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
 
 //IPAD  && Phone Media Query
 @media only screen and (min-device-width: 320px) and (max-device-width: 1024px) {
-    #medButtons {
-        margin-bottom: 3%;
-    }
-    #medButtons button {
-        width: 33%;
-    }
-    #medActiveMedsLabel {
-        display: none !important;
-    }
-    #medHistoryLink {
-        display: none !important;
-    }
+
     #tableMeds td:nth-of-type(1):before {
         content: "";
     }
@@ -157,17 +149,4 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
 
 //PHONE 
 @media only screen and (min-device-width: 319px) and (max-device-width: 750px) {
-    #medButtons {
-        margin-bottom: 6%;
-    }
-    #medButtons button {
-        width: 33%;
-        font-size: .1em;
-    }
-    #medActiveMedsLabel {
-        display: none !important;
-    }
-    #medHistoryLink {
-        display: none !important;
-    }
 }
