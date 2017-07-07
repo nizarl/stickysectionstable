@@ -1,6 +1,6 @@
 {
-    "patientInfoConstants": {
-        "componentName": "patientinfo", 
+    "medicationsConstants": {
+        "componentName": "medications", 
         "componentVersion": "0.0.2",
         "businessServiceApiVersion": "2"
     }

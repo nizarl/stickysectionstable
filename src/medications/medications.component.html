@@ -1,0 +1,68 @@
+<!--todo: move inline styles to scss-->
+<div id="medications-container" class="component-padding-top" ng-class="">
+	<div class="card" id="medsDiv">
+		<div class="medications-card-header">
+			<span class="card-header-title">Medications <span class="meds-header-parens">(Active)</span></span>
+			<a ng-click="medModel.setExpandMed()" ng-show="medModel.showMedsToggle" href="#" class="align-right" data-toggle="collapse"
+				data-target="#meds" data-collapse-group="myDivs">
+				<span class="card-header-arrow" ng-class="medModel.showPlus ? 'fa fa-chevron-down' : 'fa fa-chevron-up'"></span></a>
+		</div>
+		<div ng-if="medModel.showMedsActions" id="medButtons">
+			<button style="background: black;color: white;margin-bottom: .5em;font-size: 1em;" class="btn pull-right" ng-click="medModel.showRefillOverLay()">Add Medication
+            </button>
+			<button style="background: black;color: white;margin-bottom: .5em;font-size: 1em;" class="btn pull-right" ng-click="medModel.showRefillOverLay()">View Rx Order History
+            </button>
+			<button style="background: black;color: white;margin-bottom: .5em;font-size: 1em;" class="btn pull-right" ng-click="medModel.showRefillOverLay()">Refill Selected
+            </button>
+		</div>
+		<div class="card-content rTable">
+			<div id="meds" class="collapse in" ng-class="medModel.showMedsToggle? 'collapse': 'collapse in'">
+				<div ng-if="medModel.showMedsActions" style="color:#034782;" class="pull-left" id="medHistoryLink">
+					<span ng-class="true ? 'fa fa-chevron-circle-down fa-2x' : 'fa fa-chevron-circle-up fa-2x'"></span></a>
+					<a style="text-decoration: underline;" href="#">Show Medication History</a>
+				</div>
+				<table table st-table="medModel.displayedCollection" st-safe-src="medModel.patientMeds" id="tableMeds" class="table-meds table table-hover">
+					<thead class="">
+						<tr>
+							<th>Row</th>
+							<th style="" ng-if="medModel.showMedsActions">
+								<input type="checkbox" ng-model="selectedAll" ng-click="medModel.checkAll()">
+							</th>
+							<th id="med-content-header" class="pointer table-head-common" st-sort="medModel.getters.medicationName" st-sort-default="true" st-skip-natural="true">Name and SIG</th>
+							<th class="pointer table-head-common" st-sort="medModel.getters.medicationStartDate" st-skip-natural="true">Start Date</th>
+							<th class="pointer table-head-common" st-sort="medModel.getters.prescriber" st-skip-natural="true">Prescribed By</th>
+							<th class="pointer table-head-common" st-sort="medModel.getters.refillQty" st-skip-natural="true">Refill/Qty</th>
+							<th class="pointer table-head-common meds-supply-column" st-sort="medModel.getters.daysSupplyLeft" st-skip-natural="true">Supply Left <span class="meds-days-left">(days)</span></th>
+							<th ng-if="medModel.showMedsActions" colspan="0">Actions Key</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--<colgroup ng-if="medModel.showMedsActions">
+							<col span="3" style="">
+						</colgroup>-->
+						<tr ng-repeat="med in medModel.displayedCollection track by $index">
+							<td data-title="Medications Row number" class="meds-row-number">{{$index+1}} of {{medModel.displayedCollection.length}}</td>
+							<td ng-if="medModel.showMedsActions">
+								<input type="checkbox" ng-model="med.selected">
+							</td>
+							<td id="med-content-det" data-title="Name & SIG with comments">
+								<div><strong>{{med.medicationName}}</strong></div>
+								<div class="light-grey">{{med.dosageInstruction.text}}
+									<span ng-if="med.dosageInstruction.additionalInstructions.text">-- {{med.dosageInstruction.additionalInstructions.text}}</span>
+								</div>
+								</td>
+							<td class="light-grey" data-title="Start Date">{{med.medicationStartDate|date:'MM/dd/yyyy'}}</td>
+							<td class="light-grey" data-title="Prescribed By">{{med.prescriber.display}}</td>
+							<td class="light-grey" data-title="Refill/Qty">{{med.refillQty}}</td>
+							<td class="light-grey" data-title="Supply">{{med.daysSupplyLeft}}</td>
+							<td ng-if="medModel.showMedsActions" class="fa fa-check-square-o faMeds"></td>
+							<td ng-if="medModel.showMedsActions" class="fa fa-close faMeds"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div ng-if="medModel.showMedsRefill">
+				<meds-refill></meds-refill>
+			</div>
+
+		</div>
