@@ -1,11 +1,13 @@
 <!--todo: move inline styles to scss-->
-<div id="medications-container" class="component-padding-top" ng-class="">
-	<div class="card" id="medsDiv">
-		<div class="medications-card-header">
-			<span class="card-header-title">Medications <span class="meds-header-parens">(Active)</span></span>
+<div id="medications-container">
+	<div class="b-card b-meds-card" id="medsDiv">
+		<div id="" class="b-card__header b-meds-card__header--green">
+			<span class="b-card__header-title">Medications 
+                <span class="b-meds-card__header--parens">(Active)</span>
+                </span>
 			<a ng-click="medModel.setExpandMed()" ng-show="medModel.showMedsToggle" href="#" class="align-right" data-toggle="collapse"
 				data-target="#meds" data-collapse-group="myDivs">
-				<span class="card-header-arrow" ng-class="medModel.showPlus ? 'fa fa-chevron-down' : 'fa fa-chevron-up'"></span></a>
+				<span class="b-card__header-arrow" ng-class="medModel.showPlus ? 'fa fa-chevron-down' : 'fa fa-chevron-up'"></span></a>
 		</div>
 		<div ng-if="medModel.showMedsActions" id="medButtons">
 			<button style="background: black;color: white;margin-bottom: .5em;font-size: 1em;" class="btn pull-right" ng-click="medModel.showRefillOverLay()">Add Medication
@@ -21,31 +23,28 @@
 					<span ng-class="true ? 'fa fa-chevron-circle-down fa-2x' : 'fa fa-chevron-circle-up fa-2x'"></span></a>
 					<a style="text-decoration: underline;" href="#">Show Medication History</a>
 				</div>
-				<table table st-table="medModel.displayedCollection" st-safe-src="medModel.patientMeds" id="tableMeds" class="table-meds table table-hover">
-					<thead class="">
-						<tr>
-							<th>Row</th>
-							<th style="" ng-if="medModel.showMedsActions">
+				<table class="b-table table-meds table table-hover" st-table="medModel.displayedCollection" st-safe-src="medModel.patientMeds" id="tableMeds">
+					<thead style="display: block;" class="b-table__thead">
+                        	<tr class="b-table__tr" id="meds-content">
+							<th class="b-table__th--hidden">Row</th>
+							<th ng-if="medModel.showMedsActions">
 								<input type="checkbox" ng-model="selectedAll" ng-click="medModel.checkAll()">
 							</th>
-							<th id="med-content-header" class="pointer table-head-common" st-sort="medModel.getters.medicationName" st-sort-default="true" st-skip-natural="true">Name and SIG</th>
-							<th class="pointer table-head-common" st-sort="medModel.getters.medicationStartDate" st-skip-natural="true">Start Date</th>
-							<th class="pointer table-head-common" st-sort="medModel.getters.prescriber" st-skip-natural="true">Prescribed By</th>
-							<th class="pointer table-head-common" st-sort="medModel.getters.refillQty" st-skip-natural="true">Refill/Qty</th>
-							<th class="pointer table-head-common meds-supply-column" st-sort="medModel.getters.daysSupplyLeft" st-skip-natural="true">Supply Left <span class="meds-days-left">(days)</span></th>
+							<th class="b-table__th pointer" st-sort="medModel.getters.medicationName" st-sort-default="true" st-skip-natural="true">Name and SIG</th>
+							<th class="b-table__th pointer" st-sort="medModel.getters.medicationStartDate" st-skip-natural="true">Start Date</th>
+							<th class="b-table__th pointer" st-sort="medModel.getters.prescriber" st-skip-natural="true">Prescribed By</th>
+							<th class="b-table__th pointer" st-sort="medModel.getters.refillQty" st-skip-natural="true">Refill/Qty</th>
+							<th class="b-table__th pointer meds-supply-column" st-sort="medModel.getters.daysSupplyLeft" st-skip-natural="true">Supply Left <span class="meds-days-left">(days)</span></th>
 							<th ng-if="medModel.showMedsActions" colspan="0">Actions Key</th>
 						</tr>
 					</thead>
-					<tbody>
-						<!--<colgroup ng-if="medModel.showMedsActions">
-							<col span="3" style="">
-						</colgroup>-->
+					<tbody style="display: block;height: 260px;overflow-y: scroll; border-bottom: solid #f2efef;">
 						<tr ng-repeat="med in medModel.displayedCollection track by $index">
-							<td data-title="Medications Row number" class="meds-row-number">{{$index+1}} of {{medModel.displayedCollection.length}}</td>
-							<td ng-if="medModel.showMedsActions">
+							<td class="b-table__td b-table__td--hidden" data-title="Medications Row number">{{$index+1}} of {{medModel.displayedCollection.length}}</td>
+							<td class="b-table__td" ng-if="medModel.showMedsActions">
 								<input type="checkbox" ng-model="med.selected">
 							</td>
-							<td id="med-content-det" data-title="Name & SIG with comments">
+							<td class="b-table__td" id="med-content-det" data-title="Name & SIG with comments">
 								<div><strong>{{med.medicationName}}</strong></div>
 								<div class="light-grey">{{med.dosageInstruction.text}}
 									<span ng-if="med.dosageInstruction.additionalInstructions.text">-- {{med.dosageInstruction.additionalInstructions.text}}</span>
@@ -64,5 +63,4 @@
 			<div ng-if="medModel.showMedsRefill">
 				<meds-refill></meds-refill>
 			</div>
-
 		</div>

@@ -15,9 +15,26 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
         @content;
     }
 }
+.b-meds-card {
+    display: block;
+    @include e('header') {
+        @include m('green') {
+            border-bottom: solid #318930 !important;
+            color: #318930 !important;
+        }
+        @include m('parens') {
+            color: #A7ABAC !important;
+            font-size: 0.7em !important;
+        }
+    }
+}
 
+.scrollit {
+    overflow:scroll;
+    height:100px;
+}
 
-
+//todo: change below to BEM
 .faMeds.fa {
     width: 50%;
 }

@@ -39,7 +39,13 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
            if (resp.data.length > 0) {
                     var medVM = buildActiveMeds(resp.data);
                     medModel.patientMeds = medVM;
-                    medModel.displayedCollection = medVM;
+                    //temp test:
+                    var temp = medModel.patientMeds;
+                    var temp2 = medModel.patientMeds;
+                    var final = temp.concat(temp2);
+                    medModel.patientMeds = final;
+
+                    medModel.displayedCollection = final;
                 } else {
                     medModel.patientMeds = [];
                 }
