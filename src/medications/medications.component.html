@@ -4,7 +4,7 @@
 		<div id="" class="b-card__header b-meds-card__header--green">
 			<span class="b-card__header-title">Medications 
                 <span class="b-meds-card__header--parens">(Active)</span>
-                <span id='scroll' class="example"ng-if="medModel.displayedCollection.length > 5" style="font-size:.44em; font-style: italic ;color:red;">Scroll for additional items</span>
+                <!--<span id='scroll' class="example"ng-if="medModel.displayedCollection.length > 5" style="font-size:.44em; font-style: italic ;color:red;">Scroll for additional items</span>-->
                 </span>
 			<a ng-click="medModel.setExpandMed()" ng-show="medModel.showMedsToggle" href="#" class="align-right" data-toggle="collapse"
 				data-target="#meds" data-collapse-group="myDivs">
@@ -23,10 +23,11 @@
 							<th class="b-table__th pointer meds-supply-column" st-sort="medModel.getters.daysSupplyLeft" st-skip-natural="true">Supply Left <span class="meds-days-left">(days)</span></th>
 						</tr>
 					</thead>
-					<tbody style="border-bottom: solid #f2efef;">
+					<tbody ng-class="medModel.displayedCollection.length > 5 ? 'b-meds-table__tbody': 'b-meds-table__tbody--hidden'" style="border-bottom: solid #f2efef;">
                       
 						<tr ng-repeat="med in medModel.displayedCollection track by $index">
-							<td style="width:100%;" class="b-table__td b-table__td--hidden" data-title="Medications Row number">{{$index+1}} of {{medModel.displayedCollection.length}}</td>
+							<td style="width:100%;" class="b-table__td b-table__td--hidden row-number" data-title="Medications Row number">
+                                <span>{{$index+1}} of {{medModel.displayedCollection.length}}</td></span>
 							<td style="width:40%;"class="b-table__td" id="med-content-det" data-title="Name & SIG with comments">
 								<div style="display:inline-block"><strong>{{med.medicationName}}</strong></div>
 								<div class="light-grey">{{med.dosageInstruction.text}}
