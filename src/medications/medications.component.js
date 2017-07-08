@@ -38,11 +38,6 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
            if (resp.data.length > 0) {
                     var medVM = buildActiveMeds(resp.data);
                     medModel.patientMeds = medVM;
-                   
-                   //temp Mock more than 5 Meds.  Enable vertical scroll.
-                   var mockMeds = medModel.patientMeds.concat(medModel.patientMeds);
-                    medModel.patientMeds = mockMeds;
-
                     medModel.displayedCollection = medVM;
                 } else {
                     medModel.patientMeds = [];
