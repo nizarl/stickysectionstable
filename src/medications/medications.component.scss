@@ -48,17 +48,18 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
 
 .b-meds-table  > tbody 
 {
-   overflow: auto;
+   overflow: scroll !important;
    height: 280px;
+   
 }
 
 .b-meds-table > thead > tr > th
 {
-    width: 300px;
+    width: 460px;
 }
 .b-meds-table > tbody tr td
 {
-    width: 300px;
+    width: 460px;
 }
 
 .faMeds.fa {
@@ -79,6 +80,12 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
 
 @media only screen and (max-width: 768px),
 (min-device-width: 768px) and (max-device-width: 1024px) {
+    .b-meds-table  > tbody 
+{
+   overflow: scroll !important;
+   height: 1034px;
+   
+}
     /* Force table to not be like tables anymore */
     .table-meds table,
     .table-meds thead,
