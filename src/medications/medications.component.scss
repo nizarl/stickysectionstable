@@ -1,5 +1,5 @@
 //Media Queries
-$phone: "(min-device-width: 320px) and (max-device-width: 768px)";
+$phone: "(min-device-width: 320px) and (max-device-width: 767px)";
 $tablet: "(min-device-width: 768px) and (max-device-width: 1024px)";
 $desktop: "(min-width: 1024px)";
 $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
@@ -29,6 +29,8 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
         }
     }
 }
+
+
 
 .b-meds-table>tbody::-webkit-scrollbar {
     width: 12px;
@@ -97,12 +99,10 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
     text-align: right;
 }
 
-@media only screen and (max-width: 768px),
-(min-device-width: 768px) and (max-device-width: 1024px) {
-    // .b-meds-table>tbody {
-    //     overflow-y: scroll;
-    //     height: 1034px;
-    // }
+@media only screen and (max-width: 767px){   
+    .b-meds-table>tbody tr td {
+    width: 100%;
+}
     .row-number {
         text-align: right;
     }
@@ -140,6 +140,9 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
         padding-right: 1%;
         white-space: nowrap;
     }
+    .table-meds.table tr th{
+        font-size: 10px;
+    }
     #tableMeds td:nth-of-type(1):before {
         content: "";
     }
@@ -164,18 +167,18 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
 }
 
 //Hide first column on larger screens
-@media (min-width: 1024px) {
+//consider moving this to shared
+@media (min-width: 767px) {
     .table-meds.table tr th:nth-child(1) {
         display: none;
     }
-    .meds-row-number {
-        display: none;
-    }
+
 }
 
-//IPAD  && Phone Media Query
-@media only screen and (min-device-width: 320px) and (max-device-width: 1024px) {
-    #tableMeds td:nth-of-type(1):before {
+
+//PHONE 
+@media #{$phone} {
+     #tableMeds td:nth-of-type(1):before {
         content: "";
     }
     #tableMeds td:nth-of-type(2):before {
@@ -196,10 +199,7 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
     #tableMeds td.empty-meds-cell {
         display: none;
     }
-}
 
-//PHONE 
-@media only screen and (min-device-width: 319px) and (max-device-width: 750px) {
     .b-meds-table>tbody tr td {
         width: auto;
     }

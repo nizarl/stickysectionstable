@@ -40,8 +40,8 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
                     medModel.patientMeds = medVM;
                    
                    //temp Mock more than 5 Meds.  Enable vertical scroll.
-                   // var mockMeds = medModel.patientMeds.concat(medModel.patientMeds);
-                    medModel.patientMeds = medVM;
+                   var mockMeds = medModel.patientMeds.concat(medModel.patientMeds);
+                    medModel.patientMeds = mockMeds;
 
                     medModel.displayedCollection = medVM;
                 } else {
