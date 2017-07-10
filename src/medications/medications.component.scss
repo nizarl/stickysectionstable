@@ -30,7 +30,45 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
     }
 }
 
+//Following 2 child selectors are used as default for meds table if override not specified.
+.b-meds-table>thead>tr>th {
+    width: 460px;
+}
 
+.b-meds-table>tbody>tr>td {
+    width: 460px;
+}
+
+.b-meds-table {
+    display: block;
+    @include e('thead') {
+        display: block;
+    }
+    @include e('th') {
+        @include m('rownumber') {
+            width: 100% !important;
+        }
+        @include m('namesig') {
+            width: 39.5% !important;
+        }
+        @include m('startdate') {
+            width: 15% !important;
+        }
+    }
+}
+
+.b-meds-table-tbody {
+    display: block;
+    overflow-y: scroll;
+    height: 24em;
+    border-bottom: solid #f2efef;
+    @include e('namesig') {
+        width: 40% !important;
+    }
+    @include e('startdate') {
+        width: 15% !important;
+    }
+}
 
 .b-meds-table>tbody::-webkit-scrollbar {
     width: 12px;
@@ -46,165 +84,84 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
-//TODO: CHANGE BELOW TO BEM
-.b-meds-table {}
-
-.b-meds-table>tbody //, table thead
-{
-    display: block;
-}
-
-.b-meds-table>table {
-    display: block;
-}
-
-.b-meds-table>thead {
-    display: block;
-}
-
-// .b-meds-table>tbody {
-//     overflow-y: scroll;
-//     height: 280px;
-// }
-.b-meds-table__tbody {
-    overflow-y: scroll;
-    height: 24em;
-}
-
-.b-meds-table__tbody--hidden {
-    overflow-y: none;
-    height: auto !important;
-}
-
-.b-meds-table>thead>tr>th {
-    width: 460px;
-}
-
-.b-meds-table>tbody tr td {
-    width: 460px;
-}
-
-.faMeds.fa {
-    width: 50%;
-}
-
-.medSelectSort.md-active {
-    box-shadow: none !important;
-    border-style: solid !important;
-    border-width: 1px !important;
-    z-index: 50000;
-}
-
-.meds-row-number {
-    text-align: right;
-}
-
-@media only screen and (max-width: 767px){   
-    .b-meds-table>tbody tr td {
-    width: 100%;
-}
-    .row-number {
-        text-align: right;
-    }
-    .b-meds-table__tbody {
-        overflow-y: scroll;
-        height: 22em;
-    }
+@media only screen and (max-width: 767px) {
     /* Force table to not be like tables anymore */
-    .table-meds table,
-    .table-meds thead,
-    .table-meds tbody,
-    .table-meds th,
-    .table-meds td,
-    .table-meds tr {
+    .b-meds-table table,
+    .b-meds-table thead,
+    .b-meds-table tbody,
+    .b-meds-table th,
+    .b-meds-table td,
+    .b-meds-table tr {
         display: block;
     }
-    .table-meds thead tr {
+    .b-meds-table thead tr {
         position: absolute;
         top: -9999px;
         left: -9999px;
     }
-    .table-meds tr {
+    .b-meds-table tr {
         border: 1px solid #ccc;
     }
-    .table-meds td {
+    .b-meds-table td {
         border: none;
         border-bottom: 1px solid #eee;
         position: relative;
         padding-left: 50%;
     }
-    .table-meds td:before {
+    .b-meds-table td:before {
         top: 6px;
         left: 6px;
         width: 45%;
         padding-right: 1%;
         white-space: nowrap;
     }
-    .table-meds.table tr th{
+    .b-meds-table.table tr th {
         font-size: 10px;
     }
-    #tableMeds td:nth-of-type(1):before {
+    .b-meds-table td:nth-of-type(1):before {
         content: "";
     }
-    #tableMeds td:nth-of-type(2):before {
+    .b-meds-table td:nth-of-type(2):before {
         content: "Name & SIG:";
     }
-    #tableMeds td:nth-of-type(3):before {
+    .b-meds-table td:nth-of-type(3):before {
         content: "Start Date:";
     }
-    #tableMeds td:nth-of-type(4):before {
+    .b-meds-table td:nth-of-type(4):before {
         content: "Prescribed By:";
     }
-    #tableMeds td:nth-of-type(5):before {
+    .b-meds-table td:nth-of-type(5):before {
         content: "Refill/Qty:";
     }
-    #tableMeds td:nth-of-type(6):before {
+    .b-meds-table td:nth-of-type(6):before {
         content: "Supply Left(days):";
     }
-    #tableMeds td.empty-meds-cell {
+    .b-meds-table td.empty-meds-cell {
         display: none;
     }
 }
-
-//Hide first column on larger screens
-//consider moving this to shared
-@media (min-width: 767px) {
-    .table-meds.table tr th:nth-child(1) {
-        display: none;
-    }
-
-}
-
 
 //PHONE 
 @media #{$phone} {
-     #tableMeds td:nth-of-type(1):before {
+    .b-meds-table td:nth-of-type(1):before {
         content: "";
     }
-    #tableMeds td:nth-of-type(2):before {
+    .b-meds-table td:nth-of-type(2):before {
         content: "Name & SIG:";
     }
-    #tableMeds td:nth-of-type(3):before {
+    .b-meds-table td:nth-of-type(3):before {
         content: "Start Date:";
     }
-    #tableMeds td:nth-of-type(4):before {
+    .b-meds-table td:nth-of-type(4):before {
         content: "Prescribed By:";
     }
-    #tableMeds td:nth-of-type(5):before {
+    .b-meds-table td:nth-of-type(5):before {
         content: "Refill/Qty:";
     }
-    #tableMeds td:nth-of-type(6):before {
+    .b-meds-table td:nth-of-type(6):before {
         content: "Supply Left(days):";
     }
-    #tableMeds td.empty-meds-cell {
+    .b-meds-table td.empty-meds-cell {
         display: none;
-    }
-
-    .b-meds-table>tbody tr td {
-        width: auto;
-    }
-    .b-meds-table__tbody {
-        overflow-y: scroll;
-        height: 29em;
     }
 }

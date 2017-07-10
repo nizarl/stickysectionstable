@@ -4,7 +4,6 @@
 		<div id="" class="b-card__header b-meds-card__header--green">
 			<span class="b-card__header-title">Medications 
                 <span class="b-meds-card__header--parens">(Active)</span>
-                <!--<span id='scroll' class="example"ng-if="medModel.displayedCollection.length > 5" style="font-size:.44em; font-style: italic ;color:red;">Scroll for additional items</span>-->
                 </span>
 			<a ng-click="medModel.setExpandMed()" ng-show="medModel.showMedsToggle" href="#" class="align-right" data-toggle="collapse"
 				data-target="#meds" data-collapse-group="myDivs">
@@ -12,31 +11,28 @@
 		</div>
 		<div class="card-content">
 			<div id="meds" class="table-container collapse in" ng-class="medModel.showMedsToggle? 'collapse': 'collapse in'">
-				<table id="tableMeds" class="b-table b-meds-table table-meds table table-hover" st-table="medModel.displayedCollection" st-safe-src="medModel.patientMeds">
+				<table id="tableMeds" class="b-table b-meds-table  table table-hover" st-table="medModel.displayedCollection" st-safe-src="medModel.patientMeds">
 					<thead class="b-table__thead">
-                        	<tr class="b-table__tr" id="meds-content">
-							<th class="b-table__th--hidden">Row</th>
-							<th style="width:40%;"class="b-table__th pointer" st-sort="medModel.getters.medicationName" st-sort-default="true" st-skip-natural="true">Name and SIG</th>
-							<th style="width: 15%;" class="b-table__th pointer" st-sort="medModel.getters.medicationStartDate" st-skip-natural="true">Start Date</th>
-							<th style="width: 20%;"class="b-table__th pointer" st-sort="medModel.getters.prescriber" st-skip-natural="true">Prescribed By</th>
-							<th style="width: 13%;"class="b-table__th pointer" st-sort="medModel.getters.refillQty" st-skip-natural="true">Refill/Qty</th>
+							<th class="b-table__th--hidden b-meds-table__th--rownumber" >Row</th>
+							<th class="b-table__th b-meds-table__th--namesig pointer" st-sort="medModel.getters.medicationName" st-sort-default="true" st-skip-natural="true">Name and SIG</th>
+							<th class="b-table__th b-meds-table__th--startdate pointer" st-sort="medModel.getters.medicationStartDate" st-skip-natural="true">Start Date</th>
+							<th class="b-table__th pointer" st-sort="medModel.getters.prescriber" st-skip-natural="true">Prescribed By</th>
+							<th class="b-table__th pointer" st-sort="medModel.getters.refillQty" st-skip-natural="true">Refill/Qty</th>
 							<th class="b-table__th pointer meds-supply-column" st-sort="medModel.getters.daysSupplyLeft" st-skip-natural="true">Supply Left <span class="meds-days-left">(days)</span></th>
-						</tr>
 					</thead>
-					<tbody ng-class="medModel.displayedCollection.length > 5 ? 'b-meds-table__tbody': 'b-meds-table__tbody--hidden'" style="border-bottom: solid #f2efef;">
-                      
+					<tbody ng-class="medModel.displayedCollection.length > 5 ? 'b-meds-table-tbody': ''">  
 						<tr ng-repeat="med in medModel.displayedCollection track by $index">
-							<td style="width:100%;" class="b-table__td b-table__td--hidden row-number" data-title="Medications Row number">
+							<td class="b-table__td b-table__td--hidden b-meds-table-tbody__rownumber" data-title="Medications Row number">
                                 <span>{{$index+1}} of {{medModel.displayedCollection.length}}</td></span>
-							<td style="width:40%;"class="b-table__td" id="med-content-det" data-title="Name & SIG with comments">
-								<div style="display:inline-block"><strong>{{med.medicationName}}</strong></div>
+							<td class="b-table__td b-meds-table-tbody__namesig" id="med-content-det" data-title="Name & SIG with comments">
+								<div><strong>{{med.medicationName}}</strong></div>
 								<div class="light-grey">{{med.dosageInstruction.text}}
 									<span ng-if="med.dosageInstruction.additionalInstructions.text">-- {{med.dosageInstruction.additionalInstructions.text}}</span>
 								</div>
 								</td>
-							<td style="width: 15%;" class="light-grey" data-title="Start Date">{{med.medicationStartDate|date:'MM/dd/yyyy'}}</td>
-							<td style="width: 20%;"class="light-grey" data-title="Prescribed By">{{med.prescriber.display}}</td>
-							<td style="width:13%;"class="light-grey" data-title="Refill/Qty">{{med.refillQty}}</td>
+							<td class="b-meds-table-tbody__startdate light-grey" data-title="Start Date">{{med.medicationStartDate|date:'MM/dd/yyyy'}}</td>
+							<td class="b-meds-table-tbody__prescriber light-grey" data-title="Prescribed By">{{med.prescriber.display}}</td>
+							<td class="light-grey" data-title="Refill/Qty">{{med.refillQty}}</td>
 							<td class="light-grey" data-title="Supply">{{med.daysSupplyLeft}}</td>
 						</tr>
 					</tbody>
