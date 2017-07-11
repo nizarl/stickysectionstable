@@ -64,6 +64,7 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
     border-bottom: solid #f2efef;
     @include e('namesig') {
         width: 40% !important;
+        word-break: break-all;
     }
     @include e('startdate') {
         width: 15% !important;
