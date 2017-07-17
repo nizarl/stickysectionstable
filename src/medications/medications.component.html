@@ -9,7 +9,7 @@
 				data-target="#meds" data-collapse-group="myDivs">
 				<span class="b-card__header-arrow" ng-class="medModel.showPlus ? 'fa fa-chevron-down' : 'fa fa-chevron-up'"></span></a>
 		</div>
-		<div class="card-content">
+		<div ng-if="!medModel.showErrorMessage" class="card-content">
 			<div id="meds" class="table-container collapse in" ng-class="medModel.showMedsToggle? 'collapse': 'collapse in'">
 				<table id="tableMeds" class="b-table b-meds-table  table table-hover" st-table="medModel.displayedCollection" st-safe-src="medModel.patientMeds">
 					<thead class="b-table__thead">
@@ -38,4 +38,15 @@
 					</tbody>
 				</table>
 			</div>
+		
+		
+		
+		
 		</div>
+		<div ng-if="medModel.showErrorMessage">
+			{{medModel.restAPIError}} {{medModel.noDataMessage}}
+		</div>
+		<!-- <div ng-if="medModel.noDataAvailable">
+			{{medModel.apiError}}
+		</div> -->
+		

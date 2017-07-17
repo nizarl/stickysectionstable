@@ -11,10 +11,10 @@ angular.module('chenExternalUIComponents')
             showMedsToggle: '<'
         },
         controllerAs: "medModel",
-        controller: ['EventService', 'RestClientService', 'PathService', 'PatientService', '$timeout', 'medicationsConstants', medicationsCtrl]
+        controller: ['EventService', 'RestClientService', 'PathService', 'PatientService','ErrorMessageService', '$timeout', 'medicationsConstants', medicationsCtrl]
     });
 
-function medicationsCtrl(EventService, RestClientService, PathService, PatientService, $timeout, medicationsConstants) {
+function medicationsCtrl(EventService, RestClientService, PathService, PatientService, ErrorMessageService, $timeout, medicationsConstants) {
     var componentName = medicationsConstants.componentName;
     var componentVersion = medicationsConstants.componentVersion;
     var restClientService = RestClientService;
@@ -22,6 +22,7 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
     var pathInfo = PathService.getPathInfo();
     var componentUrl = pathInfo.componentUrl;
     var patientService = PatientService;
+    var errorMessageService = ErrorMessageService;
     var medModel = this;
     var sortPropDefault = 'hccScore';
     medModel.order = 'asc';
@@ -34,13 +35,17 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
 
 
     medModel.$onInit = function () {
-        fetchPatientMeds(RestClientService, pathInfo, patientService).then(function (resp) {
+        fetchPatientMeds(RestClientService, pathInfo, patientService, errorMessageService).then(function (resp) {
+            var resp = resp;
+            resp.data = [];
            if (resp.data.length > 0) {
                     var medVM = buildActiveMeds(resp.data);
                     medModel.patientMeds = medVM;
                     medModel.displayedCollection = medVM;
                 } else {
                     medModel.patientMeds = [];
+                    medModel.noDataMessage = errorMessageService.noDataAvailable('medications');
+                    medModel.showErrorMessage = true;
                 }
         });
     };
@@ -77,7 +82,7 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
         }
     };
 
-    function fetchPatientMeds(RestClientService, pathService, patientService) {
+    function fetchPatientMeds(RestClientService, pathService, patientService, errorMessageService) {
 
         var apiUrl = pathInfo.apiUrl;
         var patientId = patientService.getPatientId();
@@ -85,7 +90,10 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
         var config = {
             url: url
         };
-        var errorCallBack = function () {};
+        var errorCallBack = function () {
+            medModel.showErrorMessage = true;
+            medModel.restAPIError = errorMessageService.restAPIError();
+        };
 
         /**
          * 
