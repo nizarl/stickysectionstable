@@ -1,0 +1,172 @@
+//Media Queries
+$phone: "(min-device-width: 320px) and (max-device-width: 767px)";
+$tablet: "(min-device-width: 768px) and (max-device-width: 1024px)";
+$desktop: "(min-width: 1024px)";
+$tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
+//BEM Mixin
+@mixin e($element) {
+    &__#{$element} {
+        @content;
+    }
+}
+
+@mixin m($modifier) {
+    &--#{$modifier} {
+        @content;
+    }
+}
+
+.b-meds-card {
+    display: block;
+    @include e('header') {
+        @include m('green') {
+            border-bottom: solid #318930 !important;
+            color: #318930 !important;
+        }
+        @include m('parens') {
+            color: #A7ABAC !important;
+            font-size: 0.7em !important;
+        }
+    }
+}
+
+//Following 2 child selectors are used as default for meds table if override not specified.
+.b-meds-table>thead>tr>th {
+    width: 460px;
+}
+
+.b-meds-table>tbody>tr>td {
+    width: 460px;
+}
+
+.b-meds-table {
+    display: block;
+    @include e('thead') {
+        display: block;
+    }
+    @include e('th') {
+        @include m('rownumber') {
+            width: 100% !important;
+        }
+        @include m('namesig') {
+            width: 39.5% !important;
+        }
+        @include m('startdate') {
+            width: 15% !important;
+        }
+    }
+}
+
+.b-meds-table-tbody {
+    display: block;
+    overflow-y: scroll;
+    height: 24em;
+    border-bottom: solid #f2efef;
+    @include e('namesig') {
+        width: 40% !important;
+        word-break: break-all;
+    }
+    @include e('startdate') {
+        width: 15% !important;
+    }
+}
+
+.b-meds-table>tbody::-webkit-scrollbar {
+    width: 12px;
+}
+
+.b-meds-table>tbody::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.b-meds-table>tbody::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+@media only screen and (max-width: 767px) {
+    /* Force table to not be like tables anymore */
+    .b-meds-table table,
+    .b-meds-table thead,
+    .b-meds-table tbody,
+    .b-meds-table th,
+    .b-meds-table td,
+    .b-meds-table tr {
+        display: block;
+    }
+    .b-meds-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    .b-meds-table tr {
+        border: 1px solid #ccc;
+    }
+    .b-meds-table td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+    .b-meds-table td:before {
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 1%;
+        white-space: nowrap;
+    }
+    .b-meds-table.table tr th {
+        font-size: 10px;
+    }
+    .b-meds-table td:nth-of-type(1):before {
+        content: "";
+    }
+    .b-meds-table td:nth-of-type(2):before {
+        content: "Name & SIG:";
+    }
+    .b-meds-table td:nth-of-type(3):before {
+        content: "Start Date:";
+    }
+    .b-meds-table td:nth-of-type(4):before {
+        content: "Prescribed By:";
+    }
+    .b-meds-table td:nth-of-type(5):before {
+        content: "Refill/Qty:";
+    }
+    .b-meds-table td:nth-of-type(6):before {
+        content: "Supply Left(days):";
+    }
+    .b-meds-table td.empty-meds-cell {
+        display: none;
+    }
+}
+
+.meds-days-left{
+        vertical-align: 1px;
+    }
+
+//PHONE 
+@media #{$phone} {
+    .b-meds-table td:nth-of-type(1):before {
+        content: "";
+    }
+    .b-meds-table td:nth-of-type(2):before {
+        content: "Name & SIG:";
+    }
+    .b-meds-table td:nth-of-type(3):before {
+        content: "Start Date:";
+    }
+    .b-meds-table td:nth-of-type(4):before {
+        content: "Prescribed By:";
+    }
+    .b-meds-table td:nth-of-type(5):before {
+        content: "Refill/Qty:";
+    }
+    .b-meds-table td:nth-of-type(6):before {
+        content: "Supply Left(days):";
+    }
+    .b-meds-table td.empty-meds-cell {
+        display: none;
+    }
+}

@@ -1,10 +1,10 @@
-describe('component: Patient Info', function () {
+describe('component: Patient Medication', function () {
     //ARRANGE
     var $componentController;
     //Pass the actual bindings to the component
     var bindings = {
         obj: {
-            name: 'patinfo'
+            name: 'patmeds'
         }
     };
     beforeEach(module('chenExternalUIComponents'));
@@ -32,18 +32,18 @@ describe('component: Patient Info', function () {
 
     it('should render template and find element by ID', function () {
         //ACT
-        var element = $compile("<patientinfo-component></patientinfo-component")(scope);
+        var element = $compile("<meds-component></meds-component")(scope);
         element = $compile(element)(scope);
         scope.$digest();
-        var items = element.find('#pat-info-container');
+        var items = element.find('#medications-container');
         //ASSERT
         expect(items.length).toBe(1);
     });
 
     it('should create instance of component and get/set component attribute binding', function () {
         //ACT
-        var ctrl = $componentController('patientinfoComponent', null, bindings);
+        var ctrl = $componentController('medsComponent', null, bindings);
         //ASSERT
-        expect(ctrl.obj.name).toBe('patinfo');
+        expect(ctrl.obj.name).toBe('patmeds');
     });
 });
