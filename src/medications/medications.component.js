@@ -34,8 +34,10 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
     medModel.$onInit = function () {
         fetchPatientMeds(RestClientService, pathInfo, patientService).then(function (resp) {
             //temp: remove after test error message with no data
-            //   var resp = resp;
-            //  resp.data = [];
+            var resp = resp;
+            resp.data = [];
+            
+            
             if (resp.data.length > 0) {
                 var medVM = buildActiveMeds(resp.data);
                 medModel.patientMeds = medVM;
