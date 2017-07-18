@@ -33,8 +33,9 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
 
     medModel.$onInit = function () {
         fetchPatientMeds(RestClientService, pathInfo, patientService).then(function (resp) {
-         //   var resp = resp;
-         //  resp.data = [];
+            //temp: remove after test error message with no data
+            //   var resp = resp;
+            //  resp.data = [];
             if (resp.data.length > 0) {
                 var medVM = buildActiveMeds(resp.data);
                 medModel.patientMeds = medVM;
@@ -86,7 +87,7 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
 
         var apiUrl = pathInfo.apiUrl;
         var patientId = patientService.getPatientId();
-        var url = apiUrl + "medications111/" + patientId;
+        var url = apiUrl + "medications/" + patientId;
         var config = {
             url: url
         };
