@@ -6,7 +6,7 @@
                 <span class="b-meds-card__header--parens">(Active)</span>
                 </span>
 			<a ng-click="medModel.setExpandMed()" ng-show="medModel.showMedsToggle" href="#" class="align-right" data-toggle="collapse"
-				data-target="#meds" data-collapse-group="myDivs">
+				data-target="#meds,#med-errormessage" data-collapse-group="myDivs">
 				<span class="b-card__header-arrow" ng-class="medModel.showPlus ? 'fa fa-chevron-down' : 'fa fa-chevron-up'"></span></a>
 		</div>
 		<div ng-if="!medModel.showErrorMessage" class="card-content">
@@ -43,7 +43,7 @@
 		
 		
 		</div>
-		<div ng-show="medModel.showErrorMessage">
+		<div id="med-errormessage" class="collapse in" ng-show="medModel.showErrorMessage">
 			<errormessage-component errordata="medModel.errorMessageData" ></errormessage-component>
 		</div>
 		
