@@ -36,19 +36,19 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
             //temp: remove after test error message with no data
             var resp = resp;
             resp.data = [];
-            
-            
+
+
             if (resp.data.length > 0) {
                 var medVM = buildActiveMeds(resp.data);
                 medModel.patientMeds = medVM;
                 medModel.displayedCollection = medVM;
             } else {
                 medModel.patientMeds = [];
-                medModel.showErrorMessage = true;
-                medModel.errorMessageData = {
+                var errInfo = {
                     componentName: componentName,
                     errorType: 1
                 }
+                showErrorMessage(errInfo)
             }
         });
     };
@@ -94,11 +94,11 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
             url: url
         };
         var errorCallBack = function () {
-            medModel.showErrorMessage = true;
-            medModel.errorMessageData = {
+            var errInfo = {
                 componentName: componentName,
                 errorType: 2
             }
+            showErrorMessage(errInfo)
         };
 
         /**
@@ -125,5 +125,14 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
             //  med.prescriber.display = med.prescriber.display ? med.prescriber.display: "Data no available"; 
         });
         return array;
+    }
+
+    function showErrorMessage(errorObj) {
+        medModel.showErrorMessage = true;
+        medModel.errorMessageData = {
+            componentName: errorObj.componentName,
+            errorType: errorObj.errorType
+        }
+
     }
 }
