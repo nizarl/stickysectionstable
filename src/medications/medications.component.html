@@ -43,10 +43,7 @@
 		
 		
 		</div>
-		<div ng-if="medModel.showErrorMessage">
-			{{medModel.restAPIError}} {{medModel.noDataMessage}}
+		<div ng-show="medModel.showErrorMessage">
+			<errormessage-component errordata={{medModel.errorMessageData}} ></errormessage-component>
 		</div>
-		<!-- <div ng-if="medModel.noDataAvailable">
-			{{medModel.apiError}}
-		</div> -->
 		

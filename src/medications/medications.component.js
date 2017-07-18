@@ -3,7 +3,6 @@
 angular.module('chenExternalUIComponents')
 
     .component("medsComponent", {
-
         template: ['$templateCache', function ($templateCache) {
             return $templateCache.get('medications.component.html');
         }],
@@ -11,10 +10,10 @@ angular.module('chenExternalUIComponents')
             showMedsToggle: '<'
         },
         controllerAs: "medModel",
-        controller: ['EventService', 'RestClientService', 'PathService', 'PatientService','ErrorMessageService', '$timeout', 'medicationsConstants', medicationsCtrl]
+        controller: ['EventService', 'RestClientService', 'PathService', 'PatientService', '$timeout', 'medicationsConstants', medicationsCtrl]
     });
 
-function medicationsCtrl(EventService, RestClientService, PathService, PatientService, ErrorMessageService, $timeout, medicationsConstants) {
+function medicationsCtrl(EventService, RestClientService, PathService, PatientService, $timeout, medicationsConstants) {
     var componentName = medicationsConstants.componentName;
     var componentVersion = medicationsConstants.componentVersion;
     var restClientService = RestClientService;
@@ -22,7 +21,6 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
     var pathInfo = PathService.getPathInfo();
     var componentUrl = pathInfo.componentUrl;
     var patientService = PatientService;
-    var errorMessageService = ErrorMessageService;
     var medModel = this;
     var sortPropDefault = 'hccScore';
     medModel.order = 'asc';
@@ -33,23 +31,25 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
         medModel.showPlus = !medModel.showPlus;
     };
 
-
     medModel.$onInit = function () {
-        fetchPatientMeds(RestClientService, pathInfo, patientService, errorMessageService).then(function (resp) {
-            var resp = resp;
-            resp.data = [];
-           if (resp.data.length > 0) {
-                    var medVM = buildActiveMeds(resp.data);
-                    medModel.patientMeds = medVM;
-                    medModel.displayedCollection = medVM;
-                } else {
-                    medModel.patientMeds = [];
-                    medModel.noDataMessage = errorMessageService.noDataAvailable('medications');
-                    medModel.showErrorMessage = true;
+        fetchPatientMeds(RestClientService, pathInfo, patientService).then(function (resp) {
+         //   var resp = resp;
+         //  resp.data = [];
+            if (resp.data.length > 0) {
+                var medVM = buildActiveMeds(resp.data);
+                medModel.patientMeds = medVM;
+                medModel.displayedCollection = medVM;
+            } else {
+                medModel.patientMeds = [];
+                medModel.showErrorMessage = true;
+                medModel.errorMessageData = {
+                    componentName: componentName,
+                    errorType: 1
                 }
+            }
         });
     };
-     medModel.closeRefillOverlay = function () {
+    medModel.closeRefillOverlay = function () {
         medModel.showMedsRefill = false;
     };
     medModel.showRefillOverLay = function () {
@@ -82,17 +82,20 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
         }
     };
 
-    function fetchPatientMeds(RestClientService, pathService, patientService, errorMessageService) {
+    function fetchPatientMeds(RestClientService, pathService, patientService) {
 
         var apiUrl = pathInfo.apiUrl;
         var patientId = patientService.getPatientId();
-        var url = apiUrl + "medications/" + patientId;
+        var url = apiUrl + "medications111/" + patientId;
         var config = {
             url: url
         };
         var errorCallBack = function () {
             medModel.showErrorMessage = true;
-            medModel.restAPIError = errorMessageService.restAPIError();
+            medModel.errorMessageData = {
+                componentName: componentName,
+                errorType: 2
+            }
         };
 
         /**
@@ -111,8 +114,8 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
          */
         return restClientService.getData(config, errorCallBack);
     }
-    
-     function buildActiveMeds(array) {
+
+    function buildActiveMeds(array) {
         //placeholder. will use more functions to add history
         array.forEach(function (med) {
             med.selected = false;
