@@ -114,10 +114,8 @@ function medicationsCtrl(EventService, RestClientService, PathService, PatientSe
     }
 
     function buildActiveMeds(array) {
-        //placeholder. will use more functions to add history
         array.forEach(function (med) {
             med.selected = false;
-            //  med.prescriber.display = med.prescriber.display ? med.prescriber.display: "Data no available"; 
         });
         return array;
     }
