@@ -1,4 +1,3 @@
-<!--todo: move inline styles to scss-->
 <div id="medications-container">
 	<div class="b-card b-meds-card" id="medsDiv">
 		<div id="" class="b-card__header b-meds-card__header--green">
@@ -10,7 +9,7 @@
 				<span class="b-card__header-arrow" ng-class="medModel.showPlus ? 'fa fa-chevron-down' : 'fa fa-chevron-up'"></span></a>
 		</div>
 		<div ng-if="!medModel.showErrorMessage" class="card-content">
-			<div>
+			<div class="collapse in" id="meds">
 				<div class="container">
 					<div>
 						<div class="heading">
