@@ -4,46 +4,487 @@
 		<div id="" class="b-card__header b-meds-card__header--green">
 			<span class="b-card__header-title">Medications 
                 <span class="b-meds-card__header--parens">(Active)</span>
-                </span>
+			</span>
 			<a ng-click="medModel.setExpandMed()" ng-show="medModel.showMedsToggle" href="#" class="align-right" data-toggle="collapse"
-				data-target="#meds,#med-errormessage" data-collapse-group="myDivs">
+			    data-target="#meds,#med-errormessage" data-collapse-group="myDivs">
 				<span class="b-card__header-arrow" ng-class="medModel.showPlus ? 'fa fa-chevron-down' : 'fa fa-chevron-up'"></span></a>
 		</div>
 		<div ng-if="!medModel.showErrorMessage" class="card-content">
-			<div id="meds" class="table-container collapse in" ng-class="medModel.showMedsToggle? 'collapse': 'collapse in'">
-				<table id="tableMeds" class="b-table b-meds-table  table table-hover" st-table="medModel.displayedCollection" st-safe-src="medModel.patientMeds">
-					<thead class="b-table__thead">
-							<th class="b-table__th--hidden b-meds-table__th--rownumber" >Row</th>
-							<th class="b-table__th b-meds-table__th--namesig pointer" st-sort="medModel.getters.medicationName" st-sort-default="true" st-skip-natural="true">Name and SIG</th>
-							<th class="b-table__th b-meds-table__th--startdate pointer" st-sort="medModel.getters.medicationStartDate" st-skip-natural="true">Start Date</th>
-							<th class="b-table__th pointer" st-sort="medModel.getters.prescriber" st-skip-natural="true">Prescribed By</th>
-							<th class="b-table__th pointer" st-sort="medModel.getters.refillQty" st-skip-natural="true">Refill/Qty</th>
-							<th class="b-table__th pointer meds-supply-column" st-sort="medModel.getters.daysSupplyLeft" st-skip-natural="true">Supply Left <span class="meds-days-left">(days)</span></th>
-					</thead>
-					<tbody ng-class="medModel.displayedCollection.length > 5 ? 'b-meds-table-tbody': ''">  
-						<tr ng-repeat="med in medModel.displayedCollection track by $index">
-							<td class="b-table__td b-table__td--hidden b-meds-table-tbody__rownumber" data-title="Medications Row number">
-                                <span>{{$index+1}} of {{medModel.displayedCollection.length}}</td></span>
-							<td class="b-table__td b-meds-table-tbody__namesig" id="med-content-det" data-title="Name & SIG with comments">
-								<div><strong>{{med.medicationName}}</strong></div>
-								<div class="light-grey">{{med.dosageInstruction.text}}
-									<span ng-if="med.dosageInstruction.additionalInstructions.text">-- {{med.dosageInstruction.additionalInstructions.text}}</span>
-								</div>
-								</td>
-							<td class="b-meds-table-tbody__startdate light-grey" data-title="Start Date">{{med.medicationStartDate|date:'MM/dd/yyyy'}}</td>
-							<td class="b-meds-table-tbody__prescriber light-grey" data-title="Prescribed By">{{med.prescriber.display}}</td>
-							<td class="light-grey" data-title="Refill/Qty">{{med.refillQty}}</td>
-							<td class="light-grey" data-title="Supply">{{med.daysSupplyLeft}}</td>
-						</tr>
-					</tbody>
-				</table>
+			<div>
+				<div class="container">
+					<div>
+						<div class="heading">
+							<tr>
+								<th class="lab-type">General</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+							</tr>
+						</div>
+						<table class="table table-striped">
+							<tbody>
+								<tr>
+									<td class="table-description">HBV Copies/mL</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">HBV as Copies/mL</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">HBV as IU/mL</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<td class="table-description">HBV IU/mL</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">Viral Phenotype</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">log10 HIV-1 RNA</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+								</tr>
+							</tbody>
+						</table>
+								<div class="heading">
+							<tr>
+								<th class="lab-type">General</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+							</tr>
+						</div>
+						<table class="table table-striped">
+							<tbody>
+								<tr>
+									<td class="table-description">HBV Copies/mL</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">HBV as Copies/mL</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">HBV as IU/mL</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<td class="table-description">HBV IU/mL</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">Viral Phenotype</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">log10 HIV-1 RNA</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+								</tr>
+							</tbody>
+						</table>
+								<div class="heading">
+							<tr>
+								<th class="lab-type">General</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+							</tr>
+						</div>
+						<table class="table table-striped">
+							<tbody>
+								<tr>
+									<td class="table-description">HBV Copies/mL</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">HBV as Copies/mL</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">HBV as IU/mL</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<td class="table-description">HBV IU/mL</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">Viral Phenotype</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">log10 HIV-1 RNA</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+								</tr>
+							</tbody>
+						</table>
+								<div class="heading">
+							<tr>
+								<th class="lab-type">General</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+							</tr>
+						</div>
+						<table class="table table-striped">
+							<tbody>
+								<tr>
+									<td class="table-description">HBV Copies/mL</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">HBV as Copies/mL</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">HBV as IU/mL</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<td class="table-description">HBV IU/mL</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">Viral Phenotype</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">log10 HIV-1 RNA</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+								</tr>
+							</tbody>
+						</table>
+								<div class="heading">
+							<tr>
+								<th class="lab-type">General</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+								<th class="lab-date">06/21/2017</th>
+							</tr>
+						</div>
+						<table class="table table-striped">
+							<tbody>
+								<tr>
+									<td class="table-description">HBV Copies/mL</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">HBV as Copies/mL</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">HBV as IU/mL</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<td class="table-description">HBV IU/mL</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">Viral Phenotype</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+								</tr>
+								<tr>
+									<td class="table-description">log10 HIV-1 RNA</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+									<td>98</td>
+									<td>-</td>
+									<td>-</td>
+									<td>98</td>
+									<td>98</td>
+									<td>-</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<!-- <div class="heading">B</div>
+						<div>Baboon</div>
+						<div>Bat</div>
+						<div>Blue Bird</div>
+
+						<div class="heading">C</div>
+						<div>Cat</div>
+						<div>Camel</div>
+						<div>Chicken</div>
+						<div>Chipmunk</div>
+
+						<div class="heading">D</div>
+						<div>Dog</div>
+						<div>Donkey</div>
+						<div>Dave</div>
+						<div>Duck</div> -->
+					</div>
+				</div>
 			</div>
-		
-		
-		
-		
+
 		</div>
 		<div id="med-errormessage" class="collapse in" ng-show="medModel.showErrorMessage">
-			<errormessage-component errordata="medModel.errorMessageData" ></errormessage-component>
+			<errormessage-component errordata="medModel.errorMessageData"></errormessage-component>
 		</div>
-		

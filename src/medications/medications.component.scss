@@ -142,9 +142,9 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
     }
 }
 
-.meds-days-left{
-        vertical-align: 1px;
-    }
+.meds-days-left {
+    vertical-align: 1px;
+}
 
 //PHONE 
 @media #{$phone} {
@@ -169,4 +169,27 @@ $tabletAndPhone: "(min-device-width: 320px) and (max-device-width: 1024px)";
     .b-meds-table td.empty-meds-cell {
         display: none;
     }
+}
+
+.heading {
+    background: #ccc;
+    height: 50px;
+    line-height: 50px;
+    font-size: 13px;
+    padding-left: 10px;
+    padding-bottom: 60px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+    background-color: white;
+    color: black;
+    z-index: 10;
+}
+
+.container {
+    width: 100%;
+    height: 300px;
+    border: 1px solid red;
+    display: sticky;
+    overflow: auto;
 }
